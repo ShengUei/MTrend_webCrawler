@@ -1,7 +1,7 @@
 from apscheduler.schedulers.background import BackgroundScheduler
 from datetime import datetime, timezone
 
-from schedule.jobs.jobs import get_and_save_exchange_rate
+from schedule.jobs.job import get_and_save_exchange_rate
 from sendEmail.send_email import send_email
 
 scheduler = BackgroundScheduler()
