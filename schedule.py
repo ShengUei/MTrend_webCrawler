@@ -8,7 +8,7 @@ scheduler = BackgroundScheduler()
 
 try:
     #每週一 ~ 五 18:00 ，由網路抓匯率與存匯率至DB
-    scheduler.add_job(get_and_save_exchange_rate, 'cron', day_of_week = '1-5', hour = 18, minute = 0, timezone = 'utc+8')
+    scheduler.add_job(get_and_save_exchange_rate, 'cron', day_of_week = '1-5', hour = 18, minute = 0, timezone = '+8')
     scheduler.start()
 
 except Exception as e:
