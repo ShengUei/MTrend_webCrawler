@@ -22,8 +22,8 @@ def insert_all_exchange_rate(input_object_list):
 
     except BaseException as e:
         conn.rollback()
-        print("BaseException : %s", e)
-        logger.error("BaseException : %s", e)
+        print("BaseException : ", e)
+        logger.error("BaseException : ", e)
 
     else:
         conn.commit()

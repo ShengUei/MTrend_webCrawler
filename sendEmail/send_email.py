@@ -40,7 +40,7 @@ def send_email(title, content):
 
         except smtplib.SMTPException as e:
             print("SMTPException message: ", e)
-            logger.error("BaseException : %s", e)
+            logger.error("BaseException : ", e)
 
         else:
             #寄送郵件
