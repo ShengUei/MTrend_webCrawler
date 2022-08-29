@@ -12,5 +12,5 @@ def show_pid():
     local_datetime = now + timedelta(hours = 8)
 
     f = open(dir_path + filename, 'a')
-    f.write('PID: %s at %s \n' % (pid, local_datetime))
+    f.write('PID: %s at %s \n' % (pid, local_datetime.strftime('%Y/%m/%d %H:%M:%S')))
     f.close()
