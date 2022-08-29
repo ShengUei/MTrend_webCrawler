@@ -1,11 +1,13 @@
-from apscheduler.schedulers.background import BackgroundScheduler
+# from apscheduler.schedulers.background import BackgroundScheduler
+from apscheduler.schedulers.background import BlockingScheduler
 from datetime import datetime, timezone, timedelta
 
 from schedule.exchange_rate_job import get_and_save_exchange_rate
 from schedule.show_pid_job import show_pid
 from sendEmail.send_email import send_email
 
-scheduler = BackgroundScheduler()
+# scheduler = BackgroundScheduler()
+scheduler = BlockingScheduler()
 
 print("Run schedule.py at %s" % datetime.now(timezone.utc))
 
