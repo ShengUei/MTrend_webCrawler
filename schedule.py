@@ -16,9 +16,6 @@ try:
     scheduler.add_job(get_and_save_exchange_rate, 'cron', day_of_week = '1-5', hour = 18, minute = 0, timezone = 'Asia/Taipei')
     scheduler.start()
 
-#     while True:
-#             time.sleep(5)
-
 except Exception as e:
     scheduler.shutdown()
 
