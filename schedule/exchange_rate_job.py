@@ -1,9 +1,16 @@
 from datetime import datetime, timezone, timedelta
+import time
+import random
+
 from sendEmail.send_email import send_email
 from webCrawler.foreign_exchange_rate import get_daily_rate
 from dataAccess.postgresql.data_access import insert_all_exchange_rate
 
 def get_and_save_exchange_rate():
+    
+    #先 sleep 幾秒，再開始 run
+    time.sleep(random.randint(0, 60))
+
     dailyRateList = get_daily_rate()
 
     if not dailyRateList:
