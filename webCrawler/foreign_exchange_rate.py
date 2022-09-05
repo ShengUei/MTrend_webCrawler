@@ -2,6 +2,8 @@ import requests
 from bs4 import BeautifulSoup
 
 from datetime import datetime, timezone
+import time
+import random
 
 from model.Currency import Currency
 from logger.logger import get_logger
@@ -12,6 +14,9 @@ def get_daily_rate():
     logger = get_logger()
 
     try:
+        #先 sleep 幾秒，再開始 run
+        time.sleep(random.uniform(1.0, 60.0))
+
         res = requests.get(URL)
 
         soup = BeautifulSoup(res.text, 'html.parser')
