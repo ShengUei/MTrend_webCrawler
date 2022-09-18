@@ -10,7 +10,6 @@ date_str = local_datetime.strftime('%Y%m%d')
 
 HOST = 'www.twse.com.tw'
 url = 'https://www.twse.com.tw/en/fund/T86?response=json&date={0}&selectType=ALL'.format(date_str)
-# url = 'https://www.twse.com.tw/en/fund/T86?response=json&date=20220916&selectType=ALL'
 stat_code = {0: 'OK', 1: 'No Data!'}
 
 res_dict = get_request(url, HOST)
