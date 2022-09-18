@@ -19,24 +19,24 @@ def get_daily_trading_details():
         if(local_weekday > 5):
             print('Today is holiday.')
             logger.info('Today is holiday.')
-            return None
+            return {}
 
         res_dict = get_request(url, HOST)
 
-        if(res_dict == None):
+        if not res_dict:
             print('Get Data Failures From web.')
             logger.error('Get Data Failures From web.')
-            return None
+            return {}
         
         if(res_dict['stat'] != stat_code[0]):
             print('No data.')
             logger.error('No data.')
-            return None
+            return {}
 
     except Exception as e:
         print("Excetion $s", e)
         logger.error("Exception : %s" % e)
-        return None
+        return {}
 
     else:
         print("Get Daily Trading Details Success From web")

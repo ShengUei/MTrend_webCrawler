@@ -31,7 +31,7 @@ def get_request(target_url, host):
     except Exception as e:
         print("Excetion $s", e)
         logger.error("BaseException : %s" % e)
-        return None
+        return {}
 
     else:
         print("Get Data Success From web")

@@ -1,5 +1,6 @@
 from dataAccess.postgresql.connection import openConnection
 from logger.logger import get_logger
+from util.string_to_number import str_to_int
 
 def insert_all_exchange_rate(input_object_list):
     logger = get_logger()
@@ -70,23 +71,23 @@ def insert_all_trading_details(data_dict):
                         """,
                         {'datetime' : data_dict['current_datetime'], 
                         'security_code' : data_row[0], 
-                        'mainland_area_investors_total_buy' : data_row[1],
-                        'mainland_area_investors_total_sell' : data_row[2],
-                        'mainland_area_investors_difference' : data_row[3],
-                        'foreign_dealers_total_buy' : data_row[4],
-                        'foreign_dealers_total_sell' : data_row[5],
-                        'foreign_dealers_difference' : data_row[6],
-                        'securities_investment_trust_companies_total_buy' : data_row[7],
-                        'securities_investment_trust_companies_total_sell' : data_row[8],
-                        'securities_investment_trust_companies_difference' : data_row[9],
-                        'dealers_difference' : data_row[10],
-                        'dealers_proprietary_total_buy' : data_row[11],
-                        'dealers_proprietary_total_sell' : data_row[12],
-                        'dealers_proprietary_difference' : data_row[13],
-                        'dealers_hedge_total_buy' : data_row[14],
-                        'dealers_hedge_total_sell' : data_row[15],
-                        'dealers_hedge_difference' : data_row[16],
-                        'total_difference' : data_row[17]})
+                        'mainland_area_investors_total_buy' : str_to_int(data_row[1]),
+                        'mainland_area_investors_total_sell' : str_to_int(data_row[2]),
+                        'mainland_area_investors_difference' : str_to_int(data_row[3]),
+                        'foreign_dealers_total_buy' : str_to_int(data_row[4]),
+                        'foreign_dealers_total_sell' : str_to_int(data_row[5]),
+                        'foreign_dealers_difference' : str_to_int(data_row[6]),
+                        'securities_investment_trust_companies_total_buy' : str_to_int(data_row[7]),
+                        'securities_investment_trust_companies_total_sell' : str_to_int(data_row[8]),
+                        'securities_investment_trust_companies_difference' : str_to_int(data_row[9]),
+                        'dealers_difference' : str_to_int(data_row[10]),
+                        'dealers_proprietary_total_buy' : str_to_int(data_row[11]),
+                        'dealers_proprietary_total_sell' : str_to_int(data_row[12]),
+                        'dealers_proprietary_difference' : str_to_int(data_row[13]),
+                        'dealers_hedge_total_buy' : str_to_int(data_row[14]),
+                        'dealers_hedge_total_sell' : str_to_int(data_row[15]),
+                        'dealers_hedge_difference' : str_to_int(data_row[16]),
+                        'total_difference' : str_to_int(data_row[17])})
 
     except BaseException as e:
         conn.rollback()

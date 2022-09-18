@@ -3,6 +3,7 @@ from apscheduler.schedulers.background import BlockingScheduler
 from datetime import datetime, timezone, timedelta
 
 from schedule.exchange_rate_job import get_and_save_exchange_rate
+from schedule.trading_details_job import get_and_save_trading_details
 from schedule.show_pid_job import show_pid
 from sendEmail.send_email import send_email
 
@@ -17,7 +18,10 @@ try:
     print("Add Jobs to Scheduler at %s" % datetime.now(timezone.utc))
 
     #每週一 ~ 五 18:00 ，由網路抓匯率與存匯率至DB
-    scheduler.add_job(get_and_save_exchange_rate, 'cron', day_of_week = '1-5', hour = 18, minute = 0, timezone = 'Asia/Taipei')
+    scheduler.add_job(get_and_save_exchange_rate, 'cron', day_of_week = 'mon-fri', hour = 18, minute = 0, timezone = 'Asia/Taipei')
+
+    #每天 18:00 ，由網路抓三大法人交易量與三大法人交易量至DB
+    scheduler.add_job(get_and_save_trading_details, 'cron', day_of_week = 'mon–sun', hour = 18, minute = 0, timezone = 'Asia/Taipei')
 
     scheduler.add_job(show_pid, 'interval', hours = 1)
 
