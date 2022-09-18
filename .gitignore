@@ -193,3 +193,4 @@ cython_debug/
 connect_setting.py
 json_source.json
 test.py
+test_trading_details.json
