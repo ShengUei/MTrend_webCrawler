@@ -1,4 +1,3 @@
-# from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.schedulers.background import BlockingScheduler
 from datetime import datetime, timezone, timedelta
 
@@ -7,9 +6,6 @@ from schedule.trading_details_job import get_and_save_trading_details
 from schedule.show_pid_job import show_pid
 from sendEmail.send_email import send_email
 
-get_and_save_exchange_rate()
-
-# scheduler = BackgroundScheduler()
 scheduler = BlockingScheduler()
 
 print("Run schedule.py at %s" % datetime.now(timezone.utc))
