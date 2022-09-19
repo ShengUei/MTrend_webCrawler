@@ -5,10 +5,10 @@ from webCrawler.trading_details import get_daily_trading_details
 from dataAccess.postgresql.data_access import insert_all_trading_details
 
 def get_and_save_trading_details():
+    data_dict = get_daily_trading_details()
+
     now = datetime.now(timezone.utc)
     local_datetime = now + timedelta(hours = 8)
-
-    data_dict = get_daily_trading_details()
 
     if not data_dict:
         title = "Get Daily Trading Details Failure From web"

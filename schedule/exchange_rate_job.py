@@ -5,10 +5,10 @@ from webCrawler.foreign_exchange_rate import get_daily_rate
 from dataAccess.postgresql.data_access import insert_all_exchange_rate
 
 def get_and_save_exchange_rate():
+    dailyRateList = get_daily_rate()
+
     now = datetime.now(timezone.utc)
     local_datetime = now + timedelta(hours = 8)
-
-    dailyRateList = get_daily_rate()
 
     if not dailyRateList:
         title = "Get Daily Exchange Rate Failure From web"
