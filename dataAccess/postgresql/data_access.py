@@ -40,12 +40,14 @@ def insert_all_trading_details(data_dict):
 
         conn = openConnection()
         
-        if(data_dict == None):
+        if not data_dict:
             print("All Trading Details Insert Not Run")
             logger.info("All Trading Details Insert Not Run")
             return
-
+        
+        i = 0
         for data_row in data_dict['data_list']:
+
             conn.execute("""
                         INSERT INTO 
                         stock_trading_details 
@@ -87,8 +89,8 @@ def insert_all_trading_details(data_dict):
                         'dealers_hedge_total_buy' : str_to_int(data_row[14]),
                         'dealers_hedge_total_sell' : str_to_int(data_row[15]),
                         'dealers_hedge_difference' : str_to_int(data_row[16]),
-                        'total_difference' : str_to_int(data_row[17])})
-
+                        'total_difference' : str_to_int(data_row[17])})       
+        
     except BaseException as e:
         conn.rollback()
         print("BaseException : %s" % e)
