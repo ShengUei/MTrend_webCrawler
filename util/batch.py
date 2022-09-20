@@ -1,8 +1,8 @@
 import math
 
-def insert_batch(func, data_list):
+def insert_batch(func, data_list, datetime):
     max = len(data_list)
-    gap = 10
+    gap = 500
 
     if (max % gap) == 0.0:
         step = math.floor(max / gap)
@@ -18,7 +18,7 @@ def insert_batch(func, data_list):
             end = start + gap
         
         for i in range(start, end):
-            func(data_list[i])
+            func(data_list[i], datetime)
 
         start = end
 
