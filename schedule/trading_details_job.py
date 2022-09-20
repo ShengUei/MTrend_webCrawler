@@ -11,13 +11,14 @@ def get_and_save_trading_details():
     local_datetime = now + timedelta(hours = 8)
 
     if not data_dict:
+        
         title = "Get Daily Trading Details Failure From web"
         content = "Get Daily Trading Details Failure From web at {}".format(local_datetime.strftime('%Y/%m/%d %H:%M:%S'))
         send_email(title, content)
     
     else:
         insert_all_trading_details(data_dict)
-
-        title = "Get Daily Trading Details Success"
-        content = "Get Daily Trading Details Success at {}".format(local_datetime.strftime('%Y/%m/%d %H:%M:%S'))
+        
+        title = "Get Daily Trading Details Success From web"
+        content = "Get Daily Trading Details Success From web at {}".format(local_datetime.strftime('%Y/%m/%d %H:%M:%S'))
         send_email(title, content)
