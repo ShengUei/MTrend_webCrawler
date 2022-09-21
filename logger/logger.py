@@ -26,7 +26,7 @@ def get_logger():
     infoFileHandler = logging.FileHandler(dir_path + info_log_folder + '/' + filename, 'a', 'utf-8')
     infoFileHandler.setFormatter(formatter)
     infoFileHandler.setLevel(logging.INFO)                          
-    logger.addHandler(infoFileHandler)   
+    logger.addHandler(infoFileHandler)
     
     #error file handler
     errorFileHandler = logging.FileHandler(dir_path + error_log_folder + '/' + filename, 'a', 'utf-8')
@@ -39,8 +39,14 @@ def get_logger():
     consoleHandler.setFormatter(formatter)
     consoleHandler.setLevel(logging.ERROR)
     logger.addHandler(consoleHandler)
-
+    
     return logger
+
+def close_handler(logger):
+    handlers = logger.handlers
+    
+    for handler in handlers:
+            handler.close()
 
 def check_or_create_folder(log_folder):
   

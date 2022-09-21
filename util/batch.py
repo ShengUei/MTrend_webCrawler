@@ -16,7 +16,7 @@ def insert_batch(func, data_list, datetime):
             end = max
         else:
             end = start + gap
-        
+
         for i in range(start, end):
             func(data_list[i], datetime)
 
