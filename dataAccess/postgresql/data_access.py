@@ -35,9 +35,9 @@ def insert_all_exchange_rate(input_object_list):
         conn.close()
 
 def insert_all_trading_details(data_dict):
-    try:
-        logger = get_logger()
+    logger = get_logger()
 
+    try:
         conn = openConnection()
         
         if not data_dict:
@@ -105,9 +105,9 @@ def insert_all_trading_details(data_dict):
         conn.close()
 
 def insert_trading_details(data_row, current_datetime):
-    try:
-        logger = get_logger()
+    logger = get_logger()
 
+    try:
         conn = openConnection()
         
         if not data_row:
@@ -165,7 +165,7 @@ def insert_trading_details(data_row, current_datetime):
 
     else:
         conn.commit()
-        print("All Trading Details Insert Success")
+        print("Trading Details Insert Success")
         logger.info("All Trading Details Insert Success")
         
     finally:

@@ -4,6 +4,8 @@ from util.request import get_request
 from logger.logger import get_logger
 
 def get_daily_trading_details():
+    logger = get_logger()
+
     try:
         utc_now = datetime.utcnow()
         local_datetime = utc_now + timedelta(hours = 8)
@@ -11,10 +13,9 @@ def get_daily_trading_details():
         date_str = local_datetime.strftime('%Y%m%d')
 
         HOST = 'www.twse.com.tw'
-        url = 'https://www.twse.com.tw/en/fund/T86?response=json&date={0}&selectType=ALL'.format(date_str)
+        selectType = ['ALL', 24] #24: 半導體業
+        url = 'https://www.twse.com.tw/en/fund/T86?response=json&date={0}&selectType={1}'.format(date_str, selectType[1])
         stat_code = {0: 'OK', 1: 'No Data!'}
-        
-        logger = get_logger()
 
         if(local_weekday > 5):
             print('Today is holiday.')
