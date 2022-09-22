@@ -6,7 +6,7 @@ import time
 import random
 
 from model.Currency import Currency
-from logger.logger import get_logger
+from logger.logger import get_logger, close_handler
 
 def get_daily_rate():
     URL = 'https://rate.bot.com.tw/xrt?Lang=en-US'
@@ -49,14 +49,12 @@ def get_daily_rate():
             list.append(currency_object)
 
     except Exception as e:
-        print("Excetion $s", e)
-        logger.error("BaseException : %s" % e)
+        logger.error("BaseException : %s" % e, exc_info=True)
         return []
 
     else:
-        print("Get Daily Exchange Rate Success From web")
-        logger.info("Get Daily Exchange Rate Success From web")
         return list
     
     finally:
         res.close()
+        close_handler(logger)

@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 
 from util.request import get_request
-from logger.logger import get_logger
+from logger.logger import get_logger, close_handler
 
 def get_daily_trading_details():
     logger = get_logger()
@@ -18,30 +18,22 @@ def get_daily_trading_details():
         stat_code = {0: 'OK', 1: 'No Data!'}
 
         if(local_weekday > 5):
-            print('Today is holiday.')
-            logger.info('Today is holiday.')
             return {}
 
         res_dict = get_request(url, HOST)
 
         if not res_dict:
-            print('Get Data Failures From web.')
-            logger.error('Get Data Failures From web.')
             return {}
         
         if(res_dict['stat'] != stat_code[0]):
-            print('No data.')
-            logger.error('No data.')
             return {}
 
     except Exception as e:
         print("Excetion $s", e)
-        logger.error("Exception : %s" % e)
+        logger.error("Exception : %s" % e, exc_info=True)
         return {}
 
     else:
-        print("Get Daily Trading Details Success From web")
-        logger.info("Get Daily Trading Details Success From web")
         data_dict = {
             'current_datetime': utc_now,
             'data_list': res_dict['data']
@@ -49,6 +41,5 @@ def get_daily_trading_details():
         return data_dict
     
     finally:
-        print("Get Daily Trading Details Done")
-        logger.info("Get Daily Trading Details Done")
+        close_handler(logger)
 

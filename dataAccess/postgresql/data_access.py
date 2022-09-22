@@ -1,5 +1,5 @@
 from dataAccess.postgresql.connection import openConnection
-from logger.logger import get_logger
+from logger.logger import get_logger, close_handler
 from util.string_to_number import str_to_int
 
 def insert_all_exchange_rate(input_object_list):
@@ -23,16 +23,14 @@ def insert_all_exchange_rate(input_object_list):
 
     except BaseException as e:
         conn.rollback()
-        print("BaseException : %s" % e)
-        logger.error("BaseException : %s" % e)
+        logger.error("BaseException : %s" % e, exc_info=True)
 
     else:
         conn.commit()
-        print("All Currency Exchange Rate Insert Success")
-        logger.info("All Currency Exchange Rate Insert Success")
         
     finally:
         conn.close()
+        close_handler(logger)
 
 def insert_all_trading_details(data_dict):
     logger = get_logger()
@@ -41,8 +39,6 @@ def insert_all_trading_details(data_dict):
         conn = openConnection()
         
         if not data_dict:
-            print("All Trading Details Insert Not Run")
-            logger.info("All Trading Details Insert Not Run")
             return
         
         i = 0
@@ -93,16 +89,14 @@ def insert_all_trading_details(data_dict):
         
     except BaseException as e:
         conn.rollback()
-        print("BaseException : %s" % e)
-        logger.error("BaseException : %s" % e)
+        logger.error("BaseException : %s" % e, exc_info=True)
 
     else:
         conn.commit()
-        print("All Trading Details Insert Success")
-        logger.info("All Trading Details Insert Success")
         
     finally:
         conn.close()
+        close_handler(logger)
 
 def insert_trading_details(data_row, current_datetime):
     logger = get_logger()
@@ -111,8 +105,6 @@ def insert_trading_details(data_row, current_datetime):
         conn = openConnection()
         
         if not data_row:
-            print("All Trading Details Insert Not Run")
-            logger.info("All Trading Details Insert Not Run")
             return
         
         conn.execute("""
@@ -160,13 +152,11 @@ def insert_trading_details(data_row, current_datetime):
         
     except BaseException as e:
         conn.rollback()
-        print("BaseException : %s" % e)
-        logger.error("BaseException : %s" % e)
+        logger.error("BaseException : %s" % e, exc_info=True)
 
     else:
         conn.commit()
-        print("Trading Details Insert Success")
-        logger.info("All Trading Details Insert Success")
         
     finally:
         conn.close()
+        close_handler(logger)

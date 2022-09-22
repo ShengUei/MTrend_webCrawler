@@ -3,7 +3,7 @@ import requests
 import json
 import time
 
-from logger.logger import get_logger
+from logger.logger import get_logger, close_handler
 
 CHROME = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36'
 EDGE = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36 Edg/104.0.1293.70'
@@ -29,17 +29,15 @@ def get_request(target_url, host):
                                 "Referer": "https://www.google.com/"})
     
     except Exception as e:
-        print("Excetion $s", e)
-        logger.error("BaseException : %s" % e)
+        logger.error("BaseException : %s" % e, exc_info=True)
         return {}
 
     else:
-        print("Get Data Success From web")
-        logger.info("Get Data Success From web")
         return json.loads(res.text)
     
     finally:
         res.close()
+        close_handler(logger)
 
     
     
